@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    #header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 50px;
+      background-color: #333;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+    }
+
+    #header h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+
+    #toolbar {
+      display: flex;
+      align-items: center;
+    }
+
+    #toolbar button {
+      margin-left: 10px;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 5px;
+      background-color: #fff;
+      color: #333;
+      cursor: pointer;
+    }
+
+    #scroll-area {
+      margin-top: 50px;
+      height: calc(100vh - 50px);
+      background-image: url('https://picsum.photos/id/1/2000/2000');
+      background-size: cover;
+      background-position: center center;
+      overflow-y: auto;
+      padding: 20px;
+      box-sizing: border-box;
+      color: #333;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    #scroll-area h2 {
+      margin-top: 0;
+      font-size: 36px;
+    }
+
+    #scroll-area p {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+<div id="header">
+  <h1>用户名</h1>
+  <div id="toolbar">
+    <button>工具栏按钮1</button>
+    <button>工具栏按钮2</button>
+  </div>
+</div>
+
+<div id="scroll-area">
+  <h2>博客标题</h2>
+  <p>博客内容1</p>
+  <p>博客内容2</p>
+  <p>博客内容3</p>
+  <p>博客内容4</p>
+  <p>博客内容5</p>
+  <p>博客内容6</p>
+  <p>博客内容7</p>
+  <p>博客内容8</p>
+  <p>博客内容9</p>
+  <p>博客内容10</p>
+  <p>博客内容11</p>
+  <p>博客内容12</p>
+  <p>博客内容13</p>
+  <p>博客内容14</p>
+  <p>博客内容15</p>
+  <p>博客内容16</p>
+  <p>博客内容17</p>
+  <p>博客内容18</p>
+  <p>博客内容19</p>
+  <p>博客内容20</p>
+</div>
+</body>
+
+<script>
+  $.ajax({
+    type: "get",
+    datatype: "json",
+    url: "blogShowServlet",
+    data: {"username": username},
+    error: function () {
+      alert("请求失败");
+    },
+    "user": {
+      "username": "jane",
+      "password": "1234",
+      "name":"jane",
+      "birthday":"2019-07-06",
+      "gender":"女",
+      "telephone":"154648498",
+      "email":"iihuyuy@qq.com",
+      "province":"四川",
+      "city":"成都"
+    }
+  })
+</script>
+</html>

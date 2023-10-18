@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>sports</title>
+  <style>
+    html, body {
+      height: 100%;
+      background-image: url(imgs/bg.jpg);
+      background-position: center center;
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+    .container {
+      margin-top: 50px;
+      height: calc(100vh - 50px);
+      background-image: url("/imgs/bg.jpg");
+      background-size: cover;
+      background-position: center center;
+      overflow-y: auto;
+      padding: 20px;
+      box-sizing: border-box;
+      color: #333;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    .header h1 {
+      margin: 0;
+      font-size: 24px;
+      color: #0077cc;
+    }
+    .header a {
+      color: #333;
+      text-decoration: none;
+      font-size: 18px;
+      margin-left: 20px;
+    }
+    .header img {
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+    }
+
+    #blogList {
+      margin: 20px auto;
+      max-width: 800px;
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      background-color: rgba(255, 255, 255, 0.2);
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+    }
+
+    h3 {
+      margin-top: 0;
+    }
+
+    p {
+      margin-top: 0;
+      margin-bottom: 10px;
+    }
+
+    button {
+      background-color: white;
+      color: #0077c2;
+      border: none;
+      border-radius: 5px;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #eee;
+    }
+
+    .pagination {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .pagination button {
+      margin: 0 5px;
+    }
+
+    .pagination button.active {
+      background-color: #0077cc;
+      color: white;
+    }
+  </style>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    var PAGE_SIZE = 3;  // 每页显示的博客数量
+    var currentPage = 1;  // 当前页码
+    var list;
+    $(function(){
+      $.ajax({
+        type:'get',
+        datatype:'json',
+        url:'manageBlogServlet',
+        error:function (){
+          alert("请求失败！");
+        },
+        success:function (blogList){
+
+          list=blogList;
+          showBlogList(blogList);
+          showPagination(blogList);
+        }
+      })
+    })
+
+    // 显示当前页的博客列表
+    function showBlogList(blogList) {
+      var blogListHtml = "";
+      for (var i = 0; i < blogList.length; i++) {
+        var blog = blogList[i];
+        if (blog.part === "4") {
+          blogListHtml += "<li>";
+          blogListHtml += "<p>Author: " + blog.username + "</p>";
+          blogListHtml += "<h3><a href=\"blog_content.jsp?bid=" + blog.bid +"&username="+blog.username+ "\">" + blog.title + "</a></h3>";
+          blogListHtml += "<p>" + blog.main_body.substr(0, 20) + "...</p>";
+          blogListHtml += "<p>Part:" + blog.part + "</p>";
+          blogListHtml += "<p>Published on: " + blog.time + "</p>";
+          blogListHtml+= "<p ><img src='"+blog.picture+"' alt='image' width='300px'></p>";
+          blogListHtml += "</li>";
+        }
+
+      }
+      document.getElementById("blogList").innerHTML = blogListHtml;
+    }
+
+    // 显示分页组件
+
+
+
+  </script>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <img src="imgs/huahua.jpg" alt="Admin Avatar">
+    <h1>运动区</h1>
+
+  </div>
+  <ul id="blogList">
+    <!-- 这里只显示当前页的博客列表 -->
+  </ul>
+
+
+</div>
+</body>
+</html>

@@ -1,0 +1,120 @@
+.blog-edit-container {
+    width: 1000px;
+    height: calc(100% - 50px);
+    margin: 0 auto;
+}
+
+.blog-edit-container .title {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#title {
+    alignment: center;
+    margin-top: 20px;
+    height: 40px;
+    width: 890px;
+    text-indent: 10px;
+    border-radius: 10px;
+    outline: none;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+#main_body {
+    margin-top: 10px;
+    height: 500px;
+    width: 890px;
+    text-indent: 10px;
+    border-radius: 10px;
+    outline: none;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+}
+
+#submit {
+    height: 40px;
+    width: 100px;
+    color: white;
+    background-color: orange;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+}
+
+#editor {
+    border-radius: 10px;
+    opacity: 80%;
+}
+
+#delete {
+    height: 40px;
+    width: 100px;
+    color: white;
+    background-color: orange;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    margin-left: 650px;
+}
+#reply_content {
+    text-indent: 10px;
+    border-radius: 10px;
+    height: 40px;
+    outline: none;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+#another_content {
+    text-indent: 10px;
+    border-radius: 10px;
+    height: 40px;
+    outline: none;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+#submit_reply {
+    color: white;
+    height: 30px;
+    width: 70px;
+    background-color: #dcb1af;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    margin-left: 650px;
+}
+
+#another_reply {
+    color: white;
+    height: 30px;
+    width: 70px;
+    background-color: #dcb1af;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    margin-left: 650px;
+}
+
+/* 查看详情 按钮 */
+.reply_btn {
+    width: 40px;
+    height: 25px;
+    color: black;
+    /* 给颜色加上过渡效果 */
+    transition: all 0.3s;
+    background:transparent;	/*按钮背景透明*/
+    border-width:0px;	/*边框透明*/
+    outline:none;	/*点击后没边框*/
+}
+
+/* 查看详情按钮的鼠标 hover 效果 */
+.reply_btn:hover {
+    background-color: #000;
+    color: #fff;
+}

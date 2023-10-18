@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>blog_check</title>
+    <link rel="stylesheet" href="css/common.css">
+    <style type="text/css">
+        /* 导航栏样式 */
+        nav {
+            background-color: #333;
+            color: white;
+            overflow: hidden;
+        }
+
+        nav a {
+            float: left;
+            display: block;
+            color: white;
+            width: 160px;/*设置块的宽度*/
+            height: 50px;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+
+        nav a:hover {
+            background-color: #ddd;
+            color: #131212;
+        }
+        .container {
+            margin-top: 50px;
+            height: calc(100vh - 50px);
+            background-image: url("/imgs/bg.jpg");
+            background-size: cover;
+            background-position: center center;
+            overflow-y: auto;
+            padding: 20px;
+            box-sizing: border-box;
+            color: #333;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+        #blogList {
+            margin: 20px auto;
+            max-width: 800px;
+            list-style: none;
+            height: 300px;
+            padding: 0;
+        }
+
+        li {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+
+        h3 {
+            margin-top: 0;
+        }
+
+        h3 a{
+            color: #333;
+            text-decoration: none;
+            font-family: Arial, sans-serif;
+            font-size: 24px;
+        }
+        li h3 a:hover {
+            color: #e67e22;
+        }
+
+        p {
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-family: Georgia, serif;
+            font-size: 16px;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        var list;
+        $(function () {
+            $.ajax({
+                type: 'get',
+                datatype: 'json',
+                url: 'manageBlogServlet',
+                error:function (){
+                    alert("请求失败！");
+                },
+                success: function(blogList) {
+                   /* alert("请求成功！");*/
+                    list = blogList;
+                    showBlogList(blogList);
+
+                }
+            })
+        })
+        // 显示当前页的博客列表
+        function showBlogList(blogList) {
+            var blogListHtml = "";
+            for (var i = blogList.length - 1; i > blogList.length - 4; i--) {
+                var blog = blogList[i];
+
+                blogListHtml += "<li>";
+                blogListHtml += "<h3><a href=\"blog_content.jsp?bid=" + blog.bid + "\">" + blog.title + "</a></h3>";
+                blogListHtml += "<p>" + blog.main_body + "</p>";
+                blogListHtml+= "<p ><img src='"+blog.picture+"' alt='image' width='300px'></p>";
+                blogListHtml += "</li>";
+
+
+            }
+            document.getElementById("blogList").innerHTML = blogListHtml;
+        }
+
+
+    </script>
+</head>
+<body>
+<div class="nav">
+    <img src="imgs/huahua.jpg" alt="">
+    <span class="title">我的博客系统</span>
+    <!-- 用来占据中间位置 -->
+    <span class="spacer"></span>
+    <a href="pim.jsp">个人中心</a>
+    <a href="friends.jsp">好友</a>
+    <a href="blog_list.jsp">主页</a>
+    <a href="blog_edit.html">写博客</a>
+    <a href="blog_check.html">博客查询</a>
+    <a href="login.html">注销</a>
+</div>
+<!-- 导航栏 -->
+<nav>
+    <a href="search.html">搜索</a>
+    <a href="page-life.html">生活</a>
+    <a href="page-amuse.html">娱乐</a>
+    <a href="page-study.html">学习</a>
+    <a href="page-tec.html">科技</a>
+    <a href="page-pet.html">宠物</a>
+    <a href="page-game.html">游戏</a>
+    <a href="page-sports.html">运动</a>
+    <a href="page-food.html">美食</a>
+</nav>
+
+
+<div class="container">
+
+    <ul id="blogList">
+    </ul>
+
+</div>
+
+
+
+</body>
+</html>

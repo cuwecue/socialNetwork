@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
+         version="5.0">
+    <welcome-file-list>
+        <welcome-file>login.html</welcome-file>
+        <welcome-file>login.jsp</welcome-file>
+    </welcome-file-list>
+
+    <servlet>
+        <servlet-name>PostServlet</servlet-name>
+        <servlet-class>com.example.socialnetwork.web.PostServlet</servlet-class>
+        <multipart-config>
+            <!-- 上传文件的最大大小 -->
+            <max-file-size>5242880</max-file-size>
+            <!-- 上传文件的缓冲区大小 -->
+            <file-size-threshold>1048576</file-size-threshold>
+            <!-- 上传文件时内存中保存的最大字节数 -->
+            <max-request-size>20971520</max-request-size>
+        </multipart-config>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PostServlet</servlet-name>
+        <url-pattern>/postServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>com.example.socialnetwork.web.LoginServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/loginServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>InfoSaveServlet</servlet-name>
+        <servlet-class>com.example.socialnetwork.web.InfoSaveServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>InfoSaveServlet</servlet-name>
+        <url-pattern>/infoSaveServlet</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>AddFriendsServlet</servlet-name>
+        <servlet-class>com.example.socialnetwork.web.AddFriendsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddFriendsServlet</servlet-name>
+        <url-pattern>/addFriendsServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>FriendsShowServlet</servlet-name>
+        <servlet-class>com.example.socialnetwork.web.FriendsShowServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>FriendsShowServlet</servlet-name>
+        <url-pattern>/friendsShowServlet</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>BlogShowServlet</servlet-name>
+        <servlet-class>com.example.socialnetwork.web.BlogShowServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>BlogShowServlet</servlet-name>
+        <url-pattern>/blogShowServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CommentServlet</servlet-name>
+        <servlet-class>com.example.socialnetwork.web.CommentServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CommentServlet</servlet-name>
+        <url-pattern>/commentServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CommentShowServlet</servlet-name>
+        <servlet-class>com.example.socialnetwork.web.CommentShowServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CommentShowServlet</servlet-name>
+        <url-pattern>/commentShowServlet</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>ReplytoComServlet</servlet-name>
+        <servlet-class>com.example.socialnetwork.web.ReplytoComServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ReplytoComServlet</servlet-name>
+        <url-pattern>/replytoComServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ReplytoComShowServlet</servlet-name>
+        <servlet-class>com.example.socialnetwork.web.ReplytoComShowServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ReplytoComShowServlet</servlet-name>
+        <url-pattern>/replytoComShowServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ReplytoRepServlet</servlet-name>
+        <servlet-class>com.example.socialnetwork.web.ReplytoRepServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ReplytoRepServlet</servlet-name>
+        <url-pattern>/replytoRepServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ReplytoRepShowServlet</servlet-name>
+        <servlet-class>com.example.socialnetwork.web.ReplytoRepShowServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ReplytoRepShowServlet</servlet-name>
+        <url-pattern>/replytoRepShowServlet</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>BlogStatisticsServlet</servlet-name>
+        <servlet-class>com.example.socialnetwork.web.BlogStatisticsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>BlogStatisticsServlet</servlet-name>
+        <url-pattern>/blogStatisticServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ContentShowServlet</servlet-name>
+        <servlet-class>com.example.socialnetwork.web.ContentShowServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ContentShowServlet</servlet-name>
+        <url-pattern>/contentShowServlet</url-pattern>
+    </servlet-mapping>
+</web-app>

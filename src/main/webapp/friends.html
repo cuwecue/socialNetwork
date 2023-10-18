@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>blog_edit</title>
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/add_friends.css">
+</head>
+<body>
+<!-- 导航栏 -->
+<div class="nav">
+  <img src="imgs/huahua.jpg" alt="">
+  <span class="title">我的博客系统</span>
+  <!-- 用来占据中间位置 -->
+  <span class="spacer"></span>
+  <a href="pim.jsp">个人中心</a>
+  <a href="blog_list.jsp">好友</a>
+  <a href="blog_list.jsp">主页</a>
+  <a href="blog_edit.html">写博客</a>
+  <a href="blog_check.html">博客查询</a>
+  <a href="login.html">注销</a>
+</div>
+
+<!-- 编辑框容器 -->
+<div class="blog-edit-container">
+  <!-- 标题编辑区 -->
+  <div>
+    <form action="addFriendsServlet" id="blog" method="post">
+      <table>
+        <tr>
+          <input type="text" name="user_2" placeholder="请输入用户名" id="title">
+          <button id="submit" type="submit">添加</button>
+        </tr>
+
+        <tr>
+          <ul id="friends">
+          </ul>
+        </tr>
+      </table>
+
+    </form>
+
+  </div>
+  <div>
+
+  </div>
+  <div></div>
+</div>
+
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="js/getParameter.js"></script>
+<script type="text/javascript">
+  $(function (){
+    var friends;
+    var friend;
+    $.ajax({
+      type : "get",
+      datatype : "json",
+      url : "friendsShowServlet",
+      error : function (){
+        alert("请求失败");
+      },
+      success : function (friends) {
+        for(var i=0;i<friends.length;i++){
+          friend += "<li><a href=''>"+friends[i]+"</a></li>"
+        }
+        $("#friends").html(friend);
+      }
+    })
+  })
+</script>
+
+</body>
+</html>
