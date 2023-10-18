@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>blog_edit</title>
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/blog_edit.css">
+
+</head>
+<body>
+<!-- 导航栏 -->
+<div class="nav">
+  <img src="imgs/huahua.jpg" alt="">
+  <span class="title">我的博客系统</span>
+  <!-- 用来占据中间位置 -->
+  <span class="spacer"></span>
+  <a href="pim.jsp">个人中心</a>
+  <a href="friends.jsp">好友</a>
+  <a href="blog_list.jsp">主页</a>
+  <a href="blog_edit.html">写博客</a>
+  <a href="blog_check.html">博客查询</a>
+  <a href="login.html">注销</a>
+</div>
+
+<!-- 编辑框容器 -->
+<div class="blog-edit-container">
+  <!-- 标题编辑区 -->
+  <div>
+    <form method="POST" enctype="multipart/form-data" action="postServlet">
+      <table>
+        <tr>
+          <input type="text" name="title" placeholder="在这里写下文章标题" id="title">
+          <button id="submit" type="submit">发布文章</button>
+        </tr>
+        <tr>
+          <select  id="sid" name="sid" onchange="selectcity()">
+            <option selected>请选择分区</option>
+            <option value="1">娱乐</option>
+            <option value="2">生活</option>
+            <option value="3">学习</option>
+            <option value="4">运动</option>
+            <option value="5">美食</option>
+            <option value="6">宠物</option>
+            <option value="7">游戏</option>
+            <option value="8">科技</option>
+          </select>
+        </tr>
+        <tr>
+          <input type="file" id="selectFiles" name="selectFiles" >
+          <textarea id="main_body" name="main_body" placeholder="在这里写下正文"></textarea>
+          <canvas id="myCanvas" width=1440 height=900></canvas>
+
+        </tr>
+      </table>
+    </form>
+  </div>
+</div>
+
+</body>
+</html>

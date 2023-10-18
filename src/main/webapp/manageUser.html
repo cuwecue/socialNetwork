@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Blog Management System</title>
+    <style>
+        html, body {
+            height: 100%;
+            background-image: url(imgs/bg.jpg);
+            background-position: center center;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            color: #0077cc;
+        }
+        .header a {
+            color: #333;
+            text-decoration: none;
+            font-size: 18px;
+            margin-left: 20px;
+        }
+        .header img {
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+        }
+        .table {
+            background-color: #fff;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            padding: 20px;
+            box-shadow: 0px 0px 10px #ddd;
+            margin-bottom: 50px;
+        }
+        .table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .table th, .table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        .table th {
+            font-weight: bold;
+            color: #0077cc;
+        }
+        .table td:last-child {
+            width: 150px;
+        }
+        .table button {
+            background-color: #0077cc;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        .table button:hover {
+            background-color: #005ea3;
+        }
+        .footer {
+            text-align: center;
+            color: #666;
+        }
+        .pager {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .pager button {
+            background-color: #0077cc;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        .pager button:hover {
+            background-color: #005ea3;
+        }
+        .pager button.current {
+            background-color: #005ea3;
+        }
+        /* 隐藏模态框 */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+        /* 遮罩层 */
+        .modal {
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        /* 模态框 */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            position: relative;
+            animation-name: modalopen;
+            animation-duration: 0.5s;
+        }
+
+        /* 关闭按钮 */
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* 动画效果 */
+        @keyframes modalopen {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(function (){
+            $.ajax({
+                type : "get",
+                dataType : "json",
+                url : "manageUserServlet",
+                error : function(){
+                    alert("请求失败");
+                },
+                success : function(users) {
+                    // 清空表格
+                    //$('#user-table tbody').empty();
+                    // 循环遍历用户数据，创建表格行
+                    $.each(users, function(index, user) {
+                        var row = $('<tr>').attr('id', user.username);
+                        row.append($('<td>').text(user.username));
+                        row.append($('<td>').text(user.password));
+                        row.append($('<td>').text(user.name));
+                        row.append($('<td>').text(user.birthday));
+                        row.append($('<td>').text(user.gender));
+                        row.append($('<td>').text(user.telephone));
+                        row.append($('<td>').text(user.email));
+                        row.append($('<td>').text(user.province));
+                        row.append($('<td>').text(user.city));
+                        row.append($('<td>').html('<button class="delete-btn">Delete</button><button class="edit-btn">Edit</button>'));
+                        $('#user-table tbody').append(row);
+                    });
+                }
+            });
+
+
+            // 处理删除按钮点击事件
+            $(document).on('click', '.delete-btn', function() {
+                var row = $(this).closest('tr');
+                var username = row.find('td:eq(0)').text();
+
+                if (confirm('Are you sure you want to delete this user?')) {
+                    $.ajax({
+                        type:"post",
+                        data:{username:username},
+                        url:"manageDeleteServlet",
+                        success:function(){
+                            row.remove();
+                            alert('User deleted successfully.');
+                        },
+                        error:function(){
+                            console.log("删除失败")
+                        }
+                    })
+                }
+            });
+
+            // 处理编辑按钮点击事件
+            $(document).on('click', '.edit-btn', function() {
+                var row = $(this).closest('tr');
+                var username = row.find('td:eq(0)').text();
+                // 获取模态框和取消按钮
+                var modal = document.getElementById("edit-modal");
+                modal.style.display = "block";
+                $("#edit-username").val(username);
+                var cancelBtn = modal.getElementsByClassName("cancel-btn")[0];
+                var saveBtn=modal.getElementsByClassName("save_btn")[0];
+               // 当用户点击取消按钮时，关闭模态框
+                cancelBtn.onclick = function() {
+                    modal.style.display = "none";
+                };
+              // 当用户点击模态框以外的区域时，关闭模态框
+                window.onclick = function(event) {
+                    if (event.target == modal) {
+                        modal.style.display = "none";
+                    }
+                };
+              //当用户按save键⑩，保存数据到数据库
+                saveBtn.onclick=function(){
+                    var userId = $('#edit-user-id').val();
+                    // username的值不可以更改
+                    var password = $('#edit-password').val();
+                    var name = $('#edit-name').val();
+                    var birthday = $('#edit-birthday').val();
+                    var gender = $('#edit-gender').val();
+                    var telephone = $('#edit-telephone').val();
+                    var email = $('#edit-email').val();
+                    var province = $('#edit-province').val();
+                    var city = $('#edit-city').val();
+                    alert(username+" "+password+" "+name+" "+birthday+" "+gender+" "+
+                        telephone+" "+ email+" "+province+" "+city);
+
+                    $.ajax({
+                        type: "POST",
+                        url: "ManageEditUserServlet",
+                        data: {
+                            username: username,
+                            password: password,
+                            name: name,
+                            birthday: birthday,
+                            gender: gender,
+                            telephone: telephone,
+                            email: email,
+                            province: province,
+                            city: city
+                        },
+                        success: function () {
+                            // 更新表格中对应行的信息
+                            var row = $('#' + userId);
+                            row.find('td:eq(0)').text(username);
+                            row.find('td:eq(1)').text(password);
+                            row.find('td:eq(2)').text(name);
+                            row.find('td:eq(3)').text(birthday);
+                            row.find('td:eq(4)').text(gender);
+                            row.find('td:eq(5)').text(telephone);
+                            row.find('td:eq(6)').text(email);
+                            row.find('td:eq(7)').text(province);
+                            row.find('td:eq(8)').text(city);
+
+                            // 隐藏模态框
+                            $('#edit-modal').hide();
+                            alert('User updated successfully.');
+                        },
+                        error: function () {
+                            console.log("更新失败");
+                        }
+                    });
+                }
+
+            });
+        });
+    </script>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <img src="imgs/huahua.jpg" alt="Admin Avatar">
+        <h1>Blog Management System</h1>
+        <div>
+            <a href="manageBlog.html">管理博客</a>
+            <a href="manageUser.html">管理用户</a>
+        </div>
+    </div>
+    <div class="table">
+        <table id="user-table">
+            <thead>
+            <tr>
+                <th>Username</th>
+                <th>Password</th>
+                <th>Name</th>
+                <th>Birthday</th>
+                <th>Gender</th>
+                <th>Telephone</th>
+                <th>Email</th>
+                <th>Province</th>
+                <th>City</th>
+                <th>Operation</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- 用户数据将在这里动态添加 -->
+            </tbody>
+        </table>
+        <div class="pager"></div>
+    </div>
+    <div class="footer">
+        <p>Showing <span id="record-count"></span> records</p>
+    </div>
+<!--模态框-->
+    <div id="edit-modal" class="modal">
+        <div class="modal-content">
+            <h3>Edit User</h3>
+            <form>
+                <input type="hidden" id="edit-user-id">
+                <div>
+                    <label for="edit-username">Username:</label>
+                    <input type="text" id="edit-username" required>
+                </div>
+                <div>
+                    <label for="edit-password">Password:</label>
+                    <input type="password" id="edit-password" required>
+                </div>
+                <div>
+                    <label for="edit-name">Name:</label>
+                    <input type="text" id="edit-name" required>
+                </div>
+                <div>
+                    <label for="edit-birthday">Birthday:</label>
+                    <input type="date" id="edit-birthday" required>
+                </div>
+                <div>
+                    <label for="edit-gender">Gender:</label>
+                    <select id="edit-gender" required>
+                        <option value="M">Male</option>
+                        <option value="F">Female</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="edit-telephone">Telephone:</label>
+                    <input type="tel" id="edit-telephone" required>
+                </div>
+                <div>
+                    <label for="edit-email">Email:</label>
+                    <input type="email" id="edit-email" required>
+                </div>
+                <div>
+                    <label for="edit-province">Province:</label>
+                    <input type="text" id="edit-province" required>
+                </div>
+                <div>
+                    <label for="edit-city">City:</label>
+                    <input type="text" id="edit-city" required>
+                </div>
+                <button type="submit" class="save_btn">Save</button>
+                <button type="button" class="cancel-btn">Cancel</button>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

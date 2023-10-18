@@ -1,0 +1,236 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    background: url(../imgs/bg1.jpg) no-repeat 0px 0px;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    -moz-background-size: 100% 100%;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+#loginDiv {
+    width: 37%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    background-color: rgba(75, 81, 95, 0.3);
+    box-shadow: 7px 7px 17px rgba(52, 56, 66, 0.5);
+    border-radius: 5px;
+}
+
+#name_trip {
+    margin-left: 50px;
+    color: red;
+}
+
+p {
+    margin-top: 30px;
+    margin-left: 20px;
+    color: azure;
+}
+
+input {
+    margin-left: 15px;
+    border-radius: 5px;
+    border-style: hidden;
+    height: 30px;
+    width: 140px;
+    background-color: rgba(216, 191, 216, 0.5);
+    outline: none;
+    color: #556B2F;
+    padding-left: 10px;
+}
+#managername{
+    width: 200px;
+}
+#password{
+    width: 202px;
+}
+.button {
+    border-color: cornsilk;
+    background-color: Olive;
+    color: aliceblue;
+    border-style: hidden;
+    border-radius: 5px;
+    width: 100px;
+    height: 31px;
+    font-size: 16px;
+}
+
+#subDiv {
+    text-align: center;
+    margin-top: 30px;
+}
+#loginMsg{
+    text-align: center;color: aliceblue;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    background-color: #f2f2f2;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+#loginDiv {
+    width: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 400px;
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+#loginDiv:before {
+    content: "";
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    top: -60px;
+    right: -60px;
+    background-image: linear-gradient(-45deg, #ff9a9e, #fecfef);
+    border-radius: 50%;
+    z-index: -1;
+    animation: rotate 6s linear infinite;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+#loginDiv:after {
+    content: "";
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    bottom: -60px;
+    left: -60px;
+    background-image: linear-gradient(45deg, #ffc3a0, #ffafbd);
+    border-radius: 50%;
+    z-index: -1;
+    animation: rotate 6s linear infinite reverse;
+}
+
+h1 {
+    font-size: 36px;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    margin-top: 50px;
+    position: relative;
+    z-index: 1;
+}
+
+p {
+    margin-top: 30px;
+    margin-left: 20px;
+    color: #555;
+    font-size: 18px;
+    font-weight: bold;
+    position: relative;
+    z-index: 1;
+}
+
+input[type=text],
+input[type=password] {
+    margin-left: 15px;
+    border-radius: 5px;
+    border-style: hidden;
+    height: 36px;
+    width: 250px;
+    background-color: rgba(255, 255, 255, 0.8);
+    outline: none;
+    color: #333;
+    font-size: 16px;
+    padding-left: 10px;
+    position: relative;
+    z-index: 1;
+}
+
+#managername {
+    width: 260px;
+}
+
+#password {
+    width: 262px;
+}
+
+.button {
+    border-color: cornsilk;
+    background-color: #333;
+    color: #fff;
+    border-style: hidden;
+    border-radius: 5px;
+    width: 120px;
+    height: 40px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    position: relative;
+    z-index: 1;
+}
+
+.button:hover {
+    background-color: #222;
+    transform: scale(1.05);
+}
+
+#subDiv {
+    text-align: center;
+    margin-top: 30px;
+    position: relative;
+    z-index: 1;
+}
+
+a {
+    color: #333;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+}
+
+a:hover {
+    color: #222;
+    transform: scale(1.05);
+}
